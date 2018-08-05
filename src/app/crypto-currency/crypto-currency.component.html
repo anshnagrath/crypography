@@ -1,4 +1,4 @@
-
+<div *ngIf = "pieView">
 <div style="text-align:center;margin-top:5%" class="btn-group" role="group" >
         <button type="button" *ngIf="selected" (click)="markAsFavourate('fav')" class="btn btn-outline-primary">Mark favourate</button>
         <button *ngIf="!selected" type="button" (click)="markAsFavourate('done')" class="btn btn-outline-primary">Set Favourate</button>
@@ -58,7 +58,11 @@
 </table>
 
 </div>
-<div style="display: block">
+
+</div>
+
+
+<div style="display: block" *ngIf="!pieView">
         <canvas baseChart
                 [data]='pieChartData'
                 [labels]='pieChartLabels'

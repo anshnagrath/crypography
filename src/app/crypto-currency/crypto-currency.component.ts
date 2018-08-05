@@ -10,6 +10,7 @@ import { Chart } from 'chartjs';
 export class CryptoCurrencyComponent {
   value;
   toView;
+  pieView = true;
   public pieData;
   locatStorage;
   seachQuery;
@@ -20,7 +21,7 @@ export class CryptoCurrencyComponent {
   public marketCap = [];
   forPie = [];
   public pieChartLabels: string[] = ['Current Price', 'One hour before Price ', 'OneDay before Price'];
-  public pieChartData: number[] = [300, 500, 100];
+  public pieChartData: number[];
   public pieChartType: string = 'pie';
 
   // dtTrigger: Subject<any> = new Subject();
@@ -38,20 +39,33 @@ export class CryptoCurrencyComponent {
     this.selectedEntities = $event;
   }
   toChartView(index) {
-    console.log(index, 'index check');
     const selectedCoin = this.forPie[index];
-    const price = selectedCoin.price;
-    var previousHrPrice = selectedCoin.percent_change_1h;
+    this.pieChartData = [];
+    previousHrPrice = '';
+    onedaybackPrice = '';
+    var previousHrPrice = selectedCoin.quotes.percent_change_1h;
     if (previousHrPrice < 0) {
-      previousHrPrice = selectedCoin.price + selectedCoin.percent_change_1h;
-    } else {
-      previousHrPrice = selectedCoin.price - selectedCoin.percent_change_1h;
+      previousHrPrice = selectedCoin.quotes.price - (Math.abs(selectedCoin.quotes.percent_change_1h) / 100 * selectedCoin.quotes.price);
     }
-    var sevendaysbackprice = selectedCoin.percent_change_7d;
-    (sevendaysbackprice < 0) ? sevendaysbackprice = selectedCoin.price + selectedCoin.percent_change_7d : sevendaysbackprice = selectedCoin.price - selectedCoin.percent_change_7d;
-    var onedaybackPrice = selectedCoin.percent_change_24h;
-    (onedaybackPrice < 0) ? onedaybackPrice = selectedCoin.price + selectedCoin.percent_change_24h : onedaybackPrice = selectedCoin.price - selectedCoin.percent_change_24h;
-    console.log(previousHrPrice, sevendaysbackprice, onedaybackPrice, 'checkssss')
+    else { previousHrPrice = selectedCoin.quotes.price + (Math.abs(selectedCoin.quotes.percent_change_1h) / 100 * selectedCoin.quotes.price); }
+    var sevendaysbackprice = selectedCoin.quotes.percent_change_7d;
+    if (sevendaysbackprice < 0) {
+      sevendaysbackprice = selectedCoin.quotes.price - (Math.abs(selectedCoin.quotes.percent_change_7d) / 100 * selectedCoin.quotes.price);
+    }
+    else {
+      sevendaysbackprice = selectedCoin.quotes.price + ((Math.abs(selectedCoin.quotes.percent_change_7d) / 100 * selectedCoin.quotes.price));
+    }
+    var onedaybackPrice = selectedCoin.quotes.percent_change_24h;
+    if (onedaybackPrice < 0) {
+      onedaybackPrice = selectedCoin.quotes.price - (Math.abs(selectedCoin.quotes.percent_change_24h) / 100 * selectedCoin.quotes.price);
+    }
+    else { onedaybackPrice = selectedCoin.quotes.price + (Math.abs(selectedCoin.quotes.percent_change_24h) / 100 * selectedCoin.quotes.price); }
+    console.log(selectedCoin.quotes.price, previousHrPrice, onedaybackPrice, 'all check 3');
+    this.pieView = false;
+    console.log(this.pieChartData, 'loooooook');
+    this.pieChartData = [Number(selectedCoin.quotes.price), Number(previousHrPrice), Number(onedaybackPrice)];
+    //this.pieChartData = [40.44, 40, 39];
+
   }
   markAsFavourate(type) {
     if (type === 'fav' || 'done') {
