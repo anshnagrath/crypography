@@ -78,6 +78,7 @@ export class CryptoCurrencyComponent {
   }
   markAsFavourate(type) {
     const toNavigate = [];
+    const obj = {};
     if (type === 'fav') {
       this.selected = !this.selected;
       console.log(this.selectedEntities, 'getting from local');
@@ -87,12 +88,14 @@ export class CryptoCurrencyComponent {
       this.router.navigate(['/crpto']);
     }
     if (type === 'com') {
-      this.selectedEntities.forEach((ele) => {
+      this.selectedEntities.forEach((ele, index) => {
+        if (ele.name) { obj[index] = ele.name; }
         this.index.push(this.value.findIndex(o => o.name === ele.name));
       });
       this.index.forEach(idx => {
         toNavigate.push(this.forPie[idx]);
       });
+      toNavigate.push(obj);
       const selectedCoins = JSON.stringify(toNavigate);
       this.router.navigate([`/compare/${selectedCoins}`]);
     }
