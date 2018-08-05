@@ -1,7 +1,6 @@
 import { AppService } from './../app.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Chart } from 'chartjs';
 @Component({
   selector: 'app-crypto-currency',
   templateUrl: './crypto-currency.component.html',
@@ -10,6 +9,7 @@ import { Chart } from 'chartjs';
 export class CryptoCurrencyComponent {
   value;
   toView;
+  tapped;
   pieView = true;
   public pieData;
   locatStorage;
@@ -38,7 +38,14 @@ export class CryptoCurrencyComponent {
   setSelectedEntities($event: any) {
     this.selectedEntities = $event;
   }
+  onTap(index) {
+    console.log('tap works', index);
+    this.selected = false;
+    this.pieView = true;
+
+  }
   toChartView(index) {
+    console.log(this.tapped, 'logging')
     const selectedCoin = this.forPie[index];
     this.pieChartData = [];
     previousHrPrice = '';
@@ -61,14 +68,14 @@ export class CryptoCurrencyComponent {
     }
     else { onedaybackPrice = selectedCoin.quotes.price + (Math.abs(selectedCoin.quotes.percent_change_24h) / 100 * selectedCoin.quotes.price); }
     console.log(selectedCoin.quotes.price, previousHrPrice, onedaybackPrice, 'all check 3');
-    this.pieView = false;
+    (this.tapped == true) ? this.pieView = true : this.pieView = false;
     console.log(this.pieChartData, 'loooooook');
     this.pieChartData = [Number(selectedCoin.quotes.price), Number(previousHrPrice), Number(onedaybackPrice)];
     //this.pieChartData = [40.44, 40, 39];
 
   }
   markAsFavourate(type) {
-    if (type === 'fav' || 'done') {
+    if (type === 'fav') {
       this.selected = !this.selected;
       console.log(this.selectedEntities, 'getting from local');
       localStorage.setItem('selectedItems', JSON.stringify(this.selectedEntities));
@@ -77,7 +84,8 @@ export class CryptoCurrencyComponent {
       this.router.navigate(['/crpto']);
     }
     if (type === 'com') {
-
+      const selectedCoins = JSON.stringify(this.selectedEntities)
+      this.router.navigate([`/compare/${selectedCoins}`]);
     }
   }
   loadData() {

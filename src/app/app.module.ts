@@ -12,13 +12,15 @@ import { DataFilterPipe } from './pipes/dataFilter';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import Chart from 'chartjs';
 
+
 @NgModule({
   declarations: [
     AppComponent,
     CryptoCurrencyComponent,
     ComparisionComponent,
     PriceComponent,
-    DataFilterPipe
+    DataFilterPipe,
+
 
   ],
   imports: [
@@ -29,9 +31,10 @@ import Chart from 'chartjs';
     ChartsModule,
 
 
+
     RouterModule.forRoot(
       [
-        { path: 'compare', component: ComparisionComponent, pathMatch: 'full' },
+        { path: 'compare/:data', component: ComparisionComponent, pathMatch: 'full' },
         { path: 'price', component: PriceComponent, pathMatch: 'full' },
         { path: '', component: CryptoCurrencyComponent, pathMatch: 'full' },
         { path: '**', component: CryptoCurrencyComponent, pathMatch: 'full' }

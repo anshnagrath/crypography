@@ -3,8 +3,10 @@
         <button type="button" *ngIf="selected" (click)="markAsFavourate('fav')" class="btn btn-outline-primary">Mark favourate</button>
         <button *ngIf="!selected" type="button" (click)="markAsFavourate('done')" class="btn btn-outline-primary">Set Favourate</button>
         <span class="btn-separator"></span>
-        <button type="button" (click)="markAsFavourate('com')" class="btn btn-outline-primary">Compare Coins</button>
-      </div>
+        <button type="button" *ngIf='tapped' (click)="markAsFavourate('com')" class="btn btn-outline-primary">Compare Two Coins</button>
+       
+
+    </div>
        
 <div class="input-group" style="width:30%;float:right; margin-top:5%">
  <input id="searchInput" type="text" class="form-control" [(ngModel)]="seachQuery" placeholder="Search By Name">
@@ -34,7 +36,7 @@
   </thead>
   <tbody >
       
-      <tr (click)="toChartView(ndx)" *ngFor="let item of mf.data; let ndx = index">
+      <tr (press)="onTap(ndx);tapped = true" (click)="toChartView(ndx)" *ngFor="let item of mf.data; let ndx = index">
      <td [hidden]="!selected">
              
     </td>
@@ -53,7 +55,7 @@
               <mfBootstrapPaginator  class="pagination"></mfBootstrapPaginator>
           </td>
       </tr>
-    
+  
   </tfoot>
 </table>
 
