@@ -1,0 +1,21 @@
+.pagination :active {
+    background-color:#eaa;
+}
+.unselected{
+margin-left:140px;    
+
+}
+.btn-separator:after {
+    content:'';
+    float: right;
+    background:white;
+    margin: 0 2px;
+    height: 34px;
+    width: 1px;
+}
+#searchInput{
+    height:35px
+}
+button{
+    border-radius: 4px;
+  }
