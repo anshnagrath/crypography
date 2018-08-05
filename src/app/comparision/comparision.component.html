@@ -1,3 +1,11 @@
-<p>
-  comparision works!
-</p>
+<div class="container">
+    <div style="display: block" *ngIf="!pieView">
+  <canvas baseChart
+                [data]='pieChartData'
+                [labels]='pieChartLabels'
+                [chartType]='pieChartType'
+                (chartHover)='chartHovered($event)'
+                (chartClick)='chartClicked($event)'></canvas>
+</div>
+  
+</div>

@@ -23,6 +23,7 @@ export class CryptoCurrencyComponent {
   public pieChartLabels: string[] = ['Current Price', 'One hour before Price ', 'OneDay before Price'];
   public pieChartData: number[];
   public pieChartType: string = 'pie';
+  public index = [];
 
   // dtTrigger: Subject<any> = new Subject();
 
@@ -36,16 +37,17 @@ export class CryptoCurrencyComponent {
     this.loadData();
   }
   setSelectedEntities($event: any) {
+
     this.selectedEntities = $event;
+
   }
   onTap(index) {
-    console.log('tap works', index);
+    //this.index.push(index);
     this.selected = false;
     this.pieView = true;
 
   }
   toChartView(index) {
-    console.log(this.tapped, 'logging')
     const selectedCoin = this.forPie[index];
     this.pieChartData = [];
     previousHrPrice = '';
@@ -75,6 +77,7 @@ export class CryptoCurrencyComponent {
 
   }
   markAsFavourate(type) {
+    const toNavigate = [];
     if (type === 'fav') {
       this.selected = !this.selected;
       console.log(this.selectedEntities, 'getting from local');
@@ -84,7 +87,13 @@ export class CryptoCurrencyComponent {
       this.router.navigate(['/crpto']);
     }
     if (type === 'com') {
-      const selectedCoins = JSON.stringify(this.selectedEntities)
+      this.selectedEntities.forEach((ele) => {
+        this.index.push(this.value.findIndex(o => o.name === ele.name));
+      });
+      this.index.forEach(idx => {
+        toNavigate.push(this.forPie[idx]);
+      });
+      const selectedCoins = JSON.stringify(toNavigate);
       this.router.navigate([`/compare/${selectedCoins}`]);
     }
   }
