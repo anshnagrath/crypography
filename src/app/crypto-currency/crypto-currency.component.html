@@ -1,15 +1,15 @@
 <div *ngIf = "pieView">
 <div style="text-align:center;margin-top:5%" class="btn-group" role="group" >
-        <button type="button" *ngIf="selected" (click)="markAsFavourate('fav')" class="btn btn-outline-primary">Mark favourate</button>
-        <button *ngIf="!selected" type="button" (click)="markAsFavourate('done')" class="btn btn-outline-primary">Set Favourate</button>
+        <button type="button" *ngIf="selected" style="font-family: Courier New"  (click)="markAsFavourate('fav')" class="btn btn-outline-primary">Mark favourate</button>
+        <button *ngIf="!selected" type="button" style="font-family: Courier New" (click)="markAsFavourate('done')" class="btn btn-outline-primary">Set Favourate</button>
         <span class="btn-separator"></span>
-        <button type="button" *ngIf='tapped' (click)="markAsFavourate('com')" class="btn btn-outline-primary">Compare Two Coins</button>
+        <button type="button" *ngIf='tapped' style="font-family: Courier New" (click)="markAsFavourate('com')" class="btn btn-outline-primary">Compare Two Coins</button>
        
 
     </div>
        
 <div class="input-group" style="width:30%;float:right; margin-top:5%">
- <input id="searchInput" type="text" class="form-control" [(ngModel)]="seachQuery" placeholder="Search By Name">
+ <input id="searchInput" type="text" class="form-control" [(ngModel)]="seachQuery" style="font-family: Courier New" placeholder="Search By Name">
  </div>
 
 <div style="width:100%;margin-top:7%">
@@ -23,13 +23,13 @@
            
             </th>
           <th style="width: 30%;">
-              <mfDefaultSorter by="name" [mfShowSortableArrows]="true">name</mfDefaultSorter>
+              <mfDefaultSorter by="name" style="font-family: Courier New" [mfShowSortableArrows]="true">name</mfDefaultSorter>
           </th>
           <th style="width: 30%">
-              <mfDefaultSorter by="price" [mfShowSortableArrows]="true">Current Price(USD)</mfDefaultSorter>
+              <mfDefaultSorter by="price" style="font-family: Courier New" [mfShowSortableArrows]="true">Current Price(USD)</mfDefaultSorter>
           </th>
           <th style="width: 30%">
-              <mfDefaultSorter by="marketCap" [mfShowSortableArrows]="true">Market Cap</mfDefaultSorter>
+              <mfDefaultSorter by="marketCap"style="font-family: Courier New" [mfShowSortableArrows]="true">Market Cap</mfDefaultSorter>
           </th>
           <th style="width: 30%">
          </th>
@@ -44,17 +44,17 @@
         <td [hidden]="selected">
             <mfRowSelector [entity]="item" [checkboxId]="ndx"></mfRowSelector>
         </td>
-          <td class="unselected">{{item.name}}</td>
-          <td class="unselected">{{item.price}}</td>
-         <td class="unselected">{{item.marketCap}}</td>
-         <td class="unselected"><button (click)="toPrice(ndx)" class="btn btn-outline-primary">Compare with Yesterday's Price</button></td>
+          <td style="font-family: Courier New" class="unselected">{{item.name}}</td>
+          <td style="font-family: Courier New" class="unselected">{{item.price}}</td>
+         <td  style="font-family: Courier New" class="unselected">{{item.marketCap}}</td>
+         <td class="unselected"><button (click)="toPrice(ndx)" style="font-family: Courier New"  class="btn btn-outline-primary">Compare with Yesterday's Price</button></td>
           
       </tr>
   </tbody>
   <tfoot >
       <tr >
           <td colspan="6">
-              <mfBootstrapPaginator  class="pagination"></mfBootstrapPaginator>
+              <mfBootstrapPaginator style="font-family: Courier New" class="pagination"></mfBootstrapPaginator>
           </td>
       </tr>
   
