@@ -1,11 +1,16 @@
 <div class="container">
-    <div style="display: block" *ngIf="!pieView">
-  <canvas baseChart
+    <div style="display: block;margin-top:7% " >
+  <canvas baseChart height="80%"
                 [data]='pieChartData'
                 [labels]='pieChartLabels'
                 [chartType]='pieChartType'
                 (chartHover)='chartHovered($event)'
                 (chartClick)='chartClicked($event)'></canvas>
 </div>
-  
+<br><br><br>
+<span id="typed" style="display:block;text-align:center; height: 5px;font-family: Courier New;font-size:150%" > </span>
+<br><br><br>
+<span  style="display:block;text-align:center; height: 5px;font-family: Courier New;font-size:150%" >{{this.obj[0]}}&nbsp;&nbsp;&nbsp;&nbsp; {{this.obj[1]}}</span>
+
+
 </div>

@@ -10,6 +10,9 @@ export class CryptoCurrencyComponent {
   value;
   toView;
   tapped;
+  public currentPrice;
+  public yesterdaysPrice;
+  public aWeekAgo;
   pieView = true;
   public pieData;
   locatStorage;
@@ -20,12 +23,10 @@ export class CryptoCurrencyComponent {
   public price = [];
   public marketCap = [];
   forPie = [];
-  public pieChartLabels: string[] = ['Current Price', 'One hour before Price ', 'OneDay before Price'];
+  public pieChartLabels: string[] = ['Current Price', 'One hour Ago Price ', 'Yesterdays Price'];
   public pieChartData: number[];
   public pieChartType: string = 'pie';
   public index = [];
-
-  // dtTrigger: Subject<any> = new Subject();
 
   constructor(public appservice: AppService, public router: Router) {
     this.toView = localStorage.getItem('selectedItems');
@@ -37,15 +38,11 @@ export class CryptoCurrencyComponent {
     this.loadData();
   }
   setSelectedEntities($event: any) {
-
     this.selectedEntities = $event;
-
   }
   onTap(index) {
-    //this.index.push(index);
     this.selected = false;
     this.pieView = true;
-
   }
   toChartView(index) {
     const selectedCoin = this.forPie[index];
@@ -72,9 +69,17 @@ export class CryptoCurrencyComponent {
     console.log(selectedCoin.quotes.price, previousHrPrice, onedaybackPrice, 'all check 3');
     (this.tapped == true) ? this.pieView = true : this.pieView = false;
     console.log(this.pieChartData, 'loooooook');
+    this.currentPrice = selectedCoin.quotes.price;
+    this.yesterdaysPrice = previousHrPrice;
+    this.aWeekAgo = onedaybackPrice;
     this.pieChartData = [Number(selectedCoin.quotes.price), Number(previousHrPrice), Number(onedaybackPrice)];
-    //this.pieChartData = [40.44, 40, 39];
 
+  }
+  toPrice(index) {
+    let data = this.forPie[index];
+    data['name'] = this.name[index].name;
+    data = JSON.stringify(data);
+    this.router.navigate([`/price/${data}`]);
   }
   markAsFavourate(type) {
     const toNavigate = [];

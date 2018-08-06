@@ -35,7 +35,7 @@ import Chart from 'chartjs';
     RouterModule.forRoot(
       [
         { path: 'compare/:data', component: ComparisionComponent, pathMatch: 'full' },
-        { path: 'price', component: PriceComponent, pathMatch: 'full' },
+        { path: 'price/:data', component: PriceComponent, pathMatch: 'full' },
         { path: '', component: CryptoCurrencyComponent, pathMatch: 'full' },
         { path: '**', component: CryptoCurrencyComponent, pathMatch: 'full' }
       ])

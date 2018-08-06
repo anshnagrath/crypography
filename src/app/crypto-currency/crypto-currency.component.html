@@ -16,22 +16,23 @@
 <table class="table table-hover"   [mfData]="locatStorage?locatStorage:name | dataFilter : seachQuery" #mf="mfDataTable"  [mfRowsOnPage]="10" [mfSaveRowsOnPage]="true" (mfSelectedEntities)="setSelectedEntities($event)">
   <thead>
       <tr>
-          <th [hidden]="selected">
+          <th style="width: 10%;" [hidden]="selected">
    
           </th>
-          <th [hidden]="!selected">
+          <th style="width: 10%;" [hidden]="!selected">
            
             </th>
-          <th style="width: 40%">
+          <th style="width: 30%;">
               <mfDefaultSorter by="name" [mfShowSortableArrows]="true">name</mfDefaultSorter>
           </th>
-          <th style="width: 40%">
+          <th style="width: 30%">
               <mfDefaultSorter by="price" [mfShowSortableArrows]="true">Current Price(USD)</mfDefaultSorter>
           </th>
-          <th style="width: 40%">
+          <th style="width: 30%">
               <mfDefaultSorter by="marketCap" [mfShowSortableArrows]="true">Market Cap</mfDefaultSorter>
           </th>
-          
+          <th style="width: 30%">
+         </th>
       </tr>
   </thead>
   <tbody >
@@ -46,6 +47,7 @@
           <td class="unselected">{{item.name}}</td>
           <td class="unselected">{{item.price}}</td>
          <td class="unselected">{{item.marketCap}}</td>
+         <td class="unselected"><button (click)="toPrice(ndx)" class="btn btn-outline-primary">Compare with Yesterday's Price</button></td>
           
       </tr>
   </tbody>
@@ -63,12 +65,18 @@
 
 </div>
 
+<div style="text-align:center;margin-top:7%" *ngIf="!pieView">
 
-<div style="display: block" *ngIf="!pieView">
-        <canvas baseChart
+<div style="display: block" >
+        <canvas height="80%" baseChart
                 [data]='pieChartData'
                 [labels]='pieChartLabels'
                 [chartType]='pieChartType'
                 (chartHover)='chartHovered($event)'
                 (chartClick)='chartClicked($event)'></canvas>
+
+</div>
+<br><br><br>
+<span style="display:block; height: 5px;font-family: Courier New;font-size:130%" >Current Price:{{currentPrice}} &nbsp;&nbsp;&nbsp;&nbsp; An hour Ago :{{yesterdaysPrice}} 
+        &nbsp;&nbsp;&nbsp;&nbsp;Yesterday's Price:{{aWeekAgo}} </span>
 </div>

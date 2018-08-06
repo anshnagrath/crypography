@@ -1,3 +1,14 @@
-<p>
-  price works!
-</p>
+<div style="text-align:center;margin-top:7%" class="container">
+    <span  style="display:block;text-align:center;  height: 5px;font-family: Courier New;font-size:200%" >{{this.name}}</span>
+    <br><br>
+    <div style="display: block" *ngIf="!pieView">
+  <canvas height="80%" baseChart
+                [data]='pieChartData'
+                [labels]='pieChartLabels'
+                [chartType]='pieChartType'
+                (chartHover)='chartHovered($event)'
+                (chartClick)='chartClicked($event)'></canvas>
+</div>
+<br><br><br>
+<span  style="display:block;text-align:center; height: 5px;font-family: Courier New;font-size:150%" >Current Price:{{this.actulaPrice}}&nbsp;&nbsp;&nbsp;&nbsp; Yesterday's Price:{{this.yesterdaysPrice}}</span>
+</div>
