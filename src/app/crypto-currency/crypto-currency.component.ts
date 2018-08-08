@@ -66,9 +66,8 @@ export class CryptoCurrencyComponent {
       onedaybackPrice = selectedCoin.quotes.price - (Math.abs(selectedCoin.quotes.percent_change_24h) / 100 * selectedCoin.quotes.price);
     }
     else { onedaybackPrice = selectedCoin.quotes.price + (Math.abs(selectedCoin.quotes.percent_change_24h) / 100 * selectedCoin.quotes.price); }
-    console.log(selectedCoin.quotes.price, previousHrPrice, onedaybackPrice, 'all check 3');
+
     (this.tapped == true) ? this.pieView = true : this.pieView = false;
-    console.log(this.pieChartData, 'loooooook');
     this.currentPrice = selectedCoin.quotes.price;
     this.yesterdaysPrice = previousHrPrice;
     this.aWeekAgo = onedaybackPrice;
@@ -86,7 +85,6 @@ export class CryptoCurrencyComponent {
     const obj = {};
     if (type === 'fav') {
       this.selected = !this.selected;
-      console.log(this.selectedEntities, 'getting from local');
       localStorage.setItem('selectedItems', JSON.stringify(this.selectedEntities));
     }
     if (type === 'done') {
@@ -109,13 +107,10 @@ export class CryptoCurrencyComponent {
     const tickers = this.appservice.getTicker().then(res => {
       this.value = [];
       this.name = [];
-      console.log(res, 'have a look at this');
       this.value = Object.values(res['data']);
-      console.log(this.value, 'check');
       this.value.forEach(element => {
         const obj = {};
         const obj1 = {};
-        console.log(element.name, 'check here');
         if (element.name) { obj['name'] = element.name; }
         if (element.quotes && element.quotes.USD) { obj1['quotes'] = element.quotes.USD; }
         if (element.quotes.USD.price) { obj['price'] = element.quotes.USD.price; }

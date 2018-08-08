@@ -21,9 +21,7 @@ export class ComparisionComponent implements OnInit {
   constructor(public actRoute: ActivatedRoute) {
 
     this.actRoute.params.subscribe((params) => {
-      console.log(params, 'params');
       this.comparisonData = JSON.parse(params.data);
-      console.log(this.comparisonData, 'params');
       this.loadData();
     });
   }
@@ -38,7 +36,6 @@ export class ComparisionComponent implements OnInit {
     this.obj = {};
     this.obj1 = {};
     this.comparisonData.forEach((element, index) => {
-      console.log(element[0], 'ele=====><><')
       if (element.quotes && element.quotes.price) {
         (element.quotes.percent_change_24h < 0) ? this.obj[index] = element.quotes.price - (Math.abs(element.quotes.percent_change_24h) / 100 * element.quotes.price) : this.obj[index] = element.quotes.price + (Math.abs(element.quotes.percent_change_24h) / 100 * element.quotes.price);
       }

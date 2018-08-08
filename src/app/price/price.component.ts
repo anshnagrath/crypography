@@ -17,9 +17,7 @@ export class PriceComponent implements OnInit {
   public name;
   constructor(public actRoute: ActivatedRoute) {
     this.actRoute.params.subscribe((params) => {
-      console.log(params, 'params');
       this.comparisonData = JSON.parse(params.data);
-      console.log(this.comparisonData, 'params');
       this.loadData();
     });
   }
